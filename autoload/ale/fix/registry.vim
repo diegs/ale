@@ -159,6 +159,11 @@ let s:default_registry = {
 \       'suggested_filetypes': ['java'],
 \       'description': 'Fix Java files with google-java-format.',
 \   },
+\   'buildifier': {
+\       'function': 'ale#fixers#buildifier#Fix',
+\       'suggested_filetypes': ['bzl'],
+\       'description': 'Fix Bazel BUILD files with buildifier.',
+\   },
 \}
 
 " Reset the function registry to the default entries.
