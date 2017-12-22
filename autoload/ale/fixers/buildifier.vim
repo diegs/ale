@@ -3,7 +3,7 @@
 
 call ale#Set('bazel_buildifier_executable', 'buildifier')
 
-function! ale#fixers#buildifier(buffer) abort
+function! ale#fixers#buildifier#Fix(buffer) abort
     let l:executable = ale#Var(a:buffer, 'bazel_buildifier_executable')
 
     return {
