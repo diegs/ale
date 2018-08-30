@@ -47,6 +47,24 @@ function! ale#path#FindNearestDirectory(buffer, directory_name) abort
     return ''
 endfunction
 
+" Given a buffer and a directory name, find the parent directory by searching upwards
+" through the paths relative to the given buffer.
+function! ale#path#FindParentDirectory(buffer, directory_name) abort
+    let l:buffer_filename = fnamemodify(bufname(a:buffer), ':p')
+    let l:buffer_filename = fnameescape(l:buffer_filename)
+
+    let l:relative_path = finddir(a:directory_name, l:buffer_filename . ';')
+
+    if !empty(l:relative_path)
+        let l:absolute_path = fnamemodify(l:relative_path, ':p')
+        if substitute(l:buffer_filename, '\', '/', 'g') =~ substitute(l:absolute_path, '\', '/', 'g')
+          return l:absolute_path
+        endif
+    endif
+
+    return ''
+endfunction
+
 " Given a buffer, a string to search for, an a global fallback for when
 " the search fails, look for a file in parent paths, and if that fails,
 " use the global fallback path instead.

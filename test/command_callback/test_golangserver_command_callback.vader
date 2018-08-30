@@ -1,0 +1,25 @@
+
+Before:
+  call ale#assert#SetUpLinterTest('go', 'golangserver')
+  let sep = has('win32') ? ';' : ':'
+  let $GOPATH=ale#path#Simplify(g:dir . '/go_paths/go1')
+      \ . sep
+      \ . ale#path#Simplify(g:dir . '/go_paths/go2')
+
+After:
+  call ale#assert#TearDownLinterTest()
+
+Execute(The golangserver callback should return the correct default value):
+  AssertLinter 'go-langserver', ale#Escape('go-langserver')
+
+Execute(should set go-langserver for go app1):
+  call ale#test#SetFilename('go_paths/go1/prj1/file.go')
+  AssertLSPLanguage 'go'
+  AssertLSPOptions {}
+  AssertLSPProject ale#path#Simplify(g:dir . '/go_paths/go1')
+
+Execute(should set go-langserver for go app2):
+  call ale#test#SetFilename('go_paths/go2/prj1/file.go')
+  AssertLSPLanguage 'go'
+  AssertLSPOptions {}
+  AssertLSPProject ale#path#Simplify(g:dir . '/go_paths/go2')
