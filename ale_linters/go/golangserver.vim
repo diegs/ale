@@ -1,17 +1,12 @@
 " Author: Horacio Sanson <https://github.com/hsanson>
 " Description: Support for go-langserver https://github.com/sourcegraph/go-langserver
 
-call ale#Set('go_langserver_bin', 'go-langserver')
-
-function! ale_linters#go#golangserver#Executable(buffer) abort
-    return ale#Var(a:buffer, 'go_langserver_bin')
-endfunction
+call ale#Set('go_langserver_executable', 'go-langserver')
 
 call ale#linter#Define('go', {
 \   'name': 'golangserver',
 \   'lsp': 'stdio',
-\   'executable_callback': 'ale_linters#go#golangserver#Executable',
+\   'executable_callback': ale#VarFunc('go_langserver_executable'),
 \   'command': '%e',
-\   'language': 'go',
 \   'project_root_callback': 'ale#go#FindProjectRoot',
 \})

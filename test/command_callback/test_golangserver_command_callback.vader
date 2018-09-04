@@ -1,5 +1,6 @@
 
 Before:
+  Save $GOPATH
   call ale#assert#SetUpLinterTest('go', 'golangserver')
   let sep = has('win32') ? ';' : ':'
   let $GOPATH=ale#path#Simplify(g:dir . '/go_paths/go1')
@@ -7,6 +8,7 @@ Before:
       \ . ale#path#Simplify(g:dir . '/go_paths/go2')
 
 After:
+  Restore
   call ale#assert#TearDownLinterTest()
 
 Execute(The golangserver callback should return the correct default value):

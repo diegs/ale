@@ -7,17 +7,17 @@ function! ale#go#FindProjectRoot(buffer) abort
 
     let l:sep = has('win32') ? ';' : ':'
 
-    for l:name in split($GOPATH, l:sep)
-        let l:dir = fnamemodify(
-        \   ale#path#FindParentDirectory(a:buffer, l:name),
-        \   ':h'
-        \)
+    let l:filename = ale#path#Simplify(expand('#' . a:buffer . ':p'))
 
-        if l:dir isnot# '.'
-          return l:dir
-        endif
+    for l:name in split($GOPATH, l:sep)
+      let l:path_dir = ale#path#Simplify(l:name)
+
+      " Use the directory from GOPATH if the current filename starts with it.
+      if l:filename[: len(l:path_dir) - 1] is? l:path_dir
+          return l:path_dir
+      endif
     endfor
 
     return ''
-endfunction
 
+endfunction

@@ -117,8 +117,8 @@ g:ale_go_staticcheck_lint_package           *g:ale_go_staticcheck_lint_package*
 ===============================================================================
 golangserver                                              *ale-go-golangserver*
 
-g:ale_go_langserver_bin                               *g:ale_go_langserver_bin*
-                                                      *b:ale_go_langserver_bin*
+g:ale_go_langserver_executable                 *g:ale_go_langserver_executable*
+                                               *b:ale_go_langserver_executable*
   Type: |String|
   Default: `'go-langserver'`
 
