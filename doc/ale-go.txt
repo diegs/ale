@@ -117,6 +117,10 @@ g:ale_go_staticcheck_lint_package           *g:ale_go_staticcheck_lint_package*
 ===============================================================================
 golangserver                                              *ale-go-golangserver*
 
+`golangserver` is a language server that has optional completion support.
+Completion is enabled automatically if |g:ale_completion_enabled| is set to
+`1`.
+
 g:ale_go_langserver_executable                 *g:ale_go_langserver_executable*
                                                *b:ale_go_langserver_executable*
   Type: |String|
